@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "foo.proto";
+import "gogoproto/gogo.proto";
+
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.equal_all) = true;
+
+package bar;
+
+message Two {
+  foo.One one = 1;
+  int64 j = 2;
+}
+
+service API {
+  rpc Do(Two) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/do"
+      body: "*"
+    };
+  }
+}
