@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-import "google/protobuf/empty.proto";
-
 package feed;
 
 service Feeder {
-  rpc GetNewFeed (google.protobuf.Empty) returns (FeedResponse) {}
+  rpc GetNewFeed (Empty) returns (stream FeedResponse) {}
 }
+
+message Empty {}
 
 message FeedResponse {
   string message = 1;

@@ -8,6 +8,7 @@ It is generated from these files:
 	feed.proto
 
 It has these top-level messages:
+	Empty
 	FeedResponse
 */
 package feed
@@ -15,7 +16,6 @@ package feed
 import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import google_protobuf "go.pedge.io/pb/go/google/protobuf"
 
 import (
 	context "golang.org/x/net/context"
@@ -33,6 +33,14 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
+type Empty struct {
+}
+
+func (m *Empty) Reset()                    { *m = Empty{} }
+func (m *Empty) String() string            { return proto.CompactTextString(m) }
+func (*Empty) ProtoMessage()               {}
+func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
+
 type FeedResponse struct {
 	Message string `protobuf:"bytes,1,opt,name=message" json:"message,omitempty"`
 }
@@ -40,7 +48,7 @@ type FeedResponse struct {
 func (m *FeedResponse) Reset()                    { *m = FeedResponse{} }
 func (m *FeedResponse) String() string            { return proto.CompactTextString(m) }
 func (*FeedResponse) ProtoMessage()               {}
-func (*FeedResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
+func (*FeedResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
 
 func (m *FeedResponse) GetMessage() string {
 	if m != nil {
@@ -50,6 +58,7 @@ func (m *FeedResponse) GetMessage() string {
 }
 
 func init() {
+	proto.RegisterType((*Empty)(nil), "feed.Empty")
 	proto.RegisterType((*FeedResponse)(nil), "feed.FeedResponse")
 }
 
@@ -64,7 +73,7 @@ const _ = grpc.SupportPackageIsVersion4
 // Client API for Feeder service
 
 type FeederClient interface {
-	GetNewFeed(ctx context.Context, in *google_protobuf.Empty, opts ...grpc.CallOption) (*FeedResponse, error)
+	GetNewFeed(ctx context.Context, in *Empty, opts ...grpc.CallOption) (Feeder_GetNewFeedClient, error)
 }
 
 type feederClient struct {
@@ -75,67 +84,93 @@ func NewFeederClient(cc *grpc.ClientConn) FeederClient {
 	return &feederClient{cc}
 }
 
-func (c *feederClient) GetNewFeed(ctx context.Context, in *google_protobuf.Empty, opts ...grpc.CallOption) (*FeedResponse, error) {
-	out := new(FeedResponse)
-	err := grpc.Invoke(ctx, "/feed.Feeder/GetNewFeed", in, out, c.cc, opts...)
+func (c *feederClient) GetNewFeed(ctx context.Context, in *Empty, opts ...grpc.CallOption) (Feeder_GetNewFeedClient, error) {
+	stream, err := grpc.NewClientStream(ctx, &_Feeder_serviceDesc.Streams[0], c.cc, "/feed.Feeder/GetNewFeed", opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &feederGetNewFeedClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Feeder_GetNewFeedClient interface {
+	Recv() (*FeedResponse, error)
+	grpc.ClientStream
+}
+
+type feederGetNewFeedClient struct {
+	grpc.ClientStream
+}
+
+func (x *feederGetNewFeedClient) Recv() (*FeedResponse, error) {
+	m := new(FeedResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 // Server API for Feeder service
 
 type FeederServer interface {
-	GetNewFeed(context.Context, *google_protobuf.Empty) (*FeedResponse, error)
+	GetNewFeed(*Empty, Feeder_GetNewFeedServer) error
 }
 
 func RegisterFeederServer(s *grpc.Server, srv FeederServer) {
 	s.RegisterService(&_Feeder_serviceDesc, srv)
 }
 
-func _Feeder_GetNewFeed_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(google_protobuf.Empty)
-	if err := dec(in); err != nil {
-		return nil, err
+func _Feeder_GetNewFeed_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(Empty)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
 	}
-	if interceptor == nil {
-		return srv.(FeederServer).GetNewFeed(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/feed.Feeder/GetNewFeed",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FeederServer).GetNewFeed(ctx, req.(*google_protobuf.Empty))
-	}
-	return interceptor(ctx, in, info, handler)
+	return srv.(FeederServer).GetNewFeed(m, &feederGetNewFeedServer{stream})
+}
+
+type Feeder_GetNewFeedServer interface {
+	Send(*FeedResponse) error
+	grpc.ServerStream
+}
+
+type feederGetNewFeedServer struct {
+	grpc.ServerStream
+}
+
+func (x *feederGetNewFeedServer) Send(m *FeedResponse) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 var _Feeder_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "feed.Feeder",
 	HandlerType: (*FeederServer)(nil),
-	Methods: []grpc.MethodDesc{
+	Methods:     []grpc.MethodDesc{},
+	Streams: []grpc.StreamDesc{
 		{
-			MethodName: "GetNewFeed",
-			Handler:    _Feeder_GetNewFeed_Handler,
+			StreamName:    "GetNewFeed",
+			Handler:       _Feeder_GetNewFeed_Handler,
+			ServerStreams: true,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
 	Metadata: "feed.proto",
 }
 
 func init() { proto.RegisterFile("feed.proto", fileDescriptor0) }
 
 var fileDescriptor0 = []byte{
-	// 144 bytes of a gzipped FileDescriptorProto
+	// 127 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x4a, 0x4b, 0x4d, 0x4d,
-	0xd1, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x01, 0xb1, 0xa5, 0xa4, 0xd3, 0xf3, 0xf3, 0xd3,
-	0x73, 0x52, 0xf5, 0xc1, 0x62, 0x49, 0xa5, 0x69, 0xfa, 0xa9, 0xb9, 0x05, 0x25, 0x95, 0x10, 0x25,
-	0x4a, 0x1a, 0x5c, 0x3c, 0x6e, 0xa9, 0xa9, 0x29, 0x41, 0xa9, 0xc5, 0x05, 0xf9, 0x79, 0xc5, 0xa9,
-	0x42, 0x12, 0x5c, 0xec, 0xb9, 0xa9, 0xc5, 0xc5, 0x89, 0xe9, 0xa9, 0x12, 0x8c, 0x0a, 0x8c, 0x1a,
-	0x9c, 0x41, 0x30, 0xae, 0x91, 0x0b, 0x17, 0x1b, 0x48, 0x65, 0x6a, 0x91, 0x90, 0x15, 0x17, 0x97,
-	0x7b, 0x6a, 0x89, 0x5f, 0x6a, 0x39, 0x88, 0x2f, 0x24, 0xa6, 0x07, 0x31, 0x5f, 0x0f, 0x66, 0xbe,
-	0x9e, 0x2b, 0xc8, 0x7c, 0x29, 0x21, 0x3d, 0xb0, 0x4b, 0x90, 0x4d, 0x57, 0x62, 0x48, 0x62, 0x03,
-	0xab, 0x32, 0x06, 0x04, 0x00, 0x00, 0xff, 0xff, 0xa3, 0x2d, 0xa6, 0xff, 0xa7, 0x00, 0x00, 0x00,
+	0xd1, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x01, 0xb1, 0x95, 0xd8, 0xb9, 0x58, 0x5d, 0x73,
+	0x0b, 0x4a, 0x2a, 0x95, 0x34, 0xb8, 0x78, 0xdc, 0x52, 0x53, 0x53, 0x82, 0x52, 0x8b, 0x0b, 0xf2,
+	0xf3, 0x8a, 0x53, 0x85, 0x24, 0xb8, 0xd8, 0x73, 0x53, 0x8b, 0x8b, 0x13, 0xd3, 0x53, 0x25, 0x18,
+	0x15, 0x18, 0x35, 0x38, 0x83, 0x60, 0x5c, 0x23, 0x6b, 0x2e, 0x36, 0x90, 0xca, 0xd4, 0x22, 0x21,
+	0x43, 0x2e, 0x2e, 0xf7, 0xd4, 0x12, 0xbf, 0xd4, 0x72, 0x10, 0x5f, 0x88, 0x5b, 0x0f, 0x6c, 0x3a,
+	0xd8, 0x38, 0x29, 0x21, 0x08, 0x07, 0xd9, 0x48, 0x25, 0x06, 0x03, 0xc6, 0x24, 0x36, 0xb0, 0xe5,
+	0xc6, 0x80, 0x00, 0x00, 0x00, 0xff, 0xff, 0x3d, 0xbc, 0xf0, 0x83, 0x8a, 0x00, 0x00, 0x00,
 }

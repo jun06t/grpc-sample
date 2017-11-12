@@ -1,10 +1,10 @@
 package main
 
 import (
-	"context"
 	"log"
 
 	pb "github.com/jun06t/grpc-sample/unary/proto"
+	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )
 
