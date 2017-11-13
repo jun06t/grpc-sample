@@ -27,9 +27,16 @@ func main() {
 		log.Fatal(err)
 	}
 
-	file, err := os.Open("supercar.jpg")
+	err = upload(stream)
 	if err != nil {
 		log.Fatal(err)
+	}
+}
+
+func upload(stream pb.Uploader_UploadClient) error {
+	file, err := os.Open("supercar.jpg")
+	if err != nil {
+		return err
 	}
 	defer file.Close()
 
@@ -40,7 +47,7 @@ func main() {
 			break
 		}
 		if err != nil {
-			log.Fatal(err)
+			return err
 		}
 
 		stream.Send(&pb.Chunk{Data: buf})
@@ -48,8 +55,9 @@ func main() {
 
 	resp, err := stream.CloseAndRecv()
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 
 	log.Println(resp.Status)
+	return nil
 }
