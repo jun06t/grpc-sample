@@ -34,8 +34,6 @@ func (s *server) Transform(stream pb.UppercaseService_TransformServer) error {
 			return err
 		}
 	}
-
-	return nil
 }
 
 func main() {
