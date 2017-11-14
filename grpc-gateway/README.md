@@ -1,4 +1,4 @@
-# protoeasy-sample
+# gRPC Gateway sample
 
 ## Compile
 ```
