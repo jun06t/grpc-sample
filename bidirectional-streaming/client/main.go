@@ -1,11 +1,11 @@
 package main
 
 import (
+	"context"
 	"io"
 	"log"
 
 	pb "github.com/jun06t/grpc-sample/bidirectional-streaming/proto"
-	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )
 

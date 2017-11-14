@@ -1,12 +1,12 @@
 package main
 
 import (
+	"context"
 	"io"
 	"log"
 	"os"
 
 	pb "github.com/jun06t/grpc-sample/client-streaming/proto"
-	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )
 

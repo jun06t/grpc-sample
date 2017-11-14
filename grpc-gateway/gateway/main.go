@@ -1,12 +1,12 @@
 package main
 
 import (
+	"context"
 	"net/http"
 	_ "net/http/pprof"
 
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	pb "github.com/jun06t/grpc-sample/grpc-gateway/proto"
-	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )
 
