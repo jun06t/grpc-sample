@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+import "google/protobuf/any.proto";
+
+package helloworld;
+
+service Greeter {
+  rpc SayHello (google.protobuf.Any) returns (HelloReply) {}
+}
+
+message HelloReply {
+  string message = 1;
+}
