@@ -14,6 +14,7 @@ It has these top-level messages:
 	GetUserRequest
 	UpdateUserRequest
 	UserResponse
+	UsersResponse
 	UserGroup
 */
 package gateway
