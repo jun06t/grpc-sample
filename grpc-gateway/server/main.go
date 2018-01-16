@@ -29,6 +29,14 @@ func (s *userService) GetUser(ctx context.Context, in *pb.GetUserRequest) (*pb.U
 	}, nil
 }
 
+func (s *userService) GetUserByGroup(ctx context.Context, in *pb.UserGroup) (*pb.UserResponse, error) {
+	log.Printf("user group is %s", in.Group)
+	return &pb.UserResponse{
+		Name: "Alice",
+		Age:  20,
+	}, nil
+}
+
 func (s *userService) UpdateUser(ctx context.Context, in *pb.UpdateUserRequest) (*pb.Empty, error) {
 	log.Printf("update body is {id: %s, name: %s, age: %d}\n", in.Id, in.Name, in.Age)
 	return &pb.Empty{}, nil

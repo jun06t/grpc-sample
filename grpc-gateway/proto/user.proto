@@ -12,6 +12,12 @@ service UserService {
     };
   }
 
+  rpc GetUserByGroup(UserGroup) returns (UserResponse) {
+    option (google.api.http) = {
+      get: "/user"
+    };
+  }
+
   rpc UpdateUser(UpdateUserRequest) returns (Empty) {
     option (google.api.http) = {
       put: "/user/{id}"
@@ -36,3 +42,12 @@ message UserResponse {
   int32 age =  3;
 }
 
+enum Group {
+  USER = 0;
+  ADMIN = 1;
+  DEVELOPER = 2;
+}
+
+message UserGroup {
+  Group group = 1;
+}
