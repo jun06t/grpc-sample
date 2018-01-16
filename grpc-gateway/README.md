@@ -36,6 +36,16 @@ This returns
 {"id":"100","name":"Alice","age":20}
 ```
 
+### Get Users By Group
+```
+curl http://localhost:3000/user?group=ADMIN
+```
+
+This returns
+```
+{"group":"ADMIN","users":[{"name":"Alice","age":20},{"name":"Bob","age":24}]}
+```
+
 ### Update User
 ```
 curl -XPUT http://localhost:3000/user/100 -d '{"name": "bob", "age": 16}'
