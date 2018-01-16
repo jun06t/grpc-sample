@@ -12,7 +12,7 @@ service UserService {
     };
   }
 
-  rpc GetUserByGroup(UserGroup) returns (UsersResponse) {
+  rpc GetUsersByGroup(UserGroupRequest) returns (UsersResponse) {
     option (google.api.http) = {
       get: "/user"
     };
@@ -42,17 +42,18 @@ message UserResponse {
   int32 age =  3;
 }
 
-message UsersResponse {
-  Group group = 1;
-  repeated UserResponse users = 2;
-}
-
 enum Group {
   USER = 0;
   ADMIN = 1;
   DEVELOPER = 2;
 }
 
-message UserGroup {
+message UserGroupRequest {
   Group group = 1;
 }
+
+message UsersResponse {
+  Group group = 1;
+  repeated UserResponse users = 2;
+}
+

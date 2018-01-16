@@ -29,7 +29,7 @@ func (s *userService) GetUser(ctx context.Context, in *pb.GetUserRequest) (*pb.U
 	}, nil
 }
 
-func (s *userService) GetUserByGroup(ctx context.Context, in *pb.UserGroup) (*pb.UsersResponse, error) {
+func (s *userService) GetUsersByGroup(ctx context.Context, in *pb.UserGroupRequest) (*pb.UsersResponse, error) {
 	log.Printf("user group is %s", in.Group)
 	return &pb.UsersResponse{
 		Group: in.Group,
