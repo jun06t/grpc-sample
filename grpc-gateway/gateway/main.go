@@ -4,15 +4,23 @@ import (
 	"context"
 	"net/http"
 	_ "net/http/pprof"
+	"os"
 
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	pb "github.com/jun06t/grpc-sample/grpc-gateway/proto"
 	"google.golang.org/grpc"
 )
 
-const (
+var (
 	endpoint = "localhost:8080"
 )
+
+func init() {
+	ep := os.Getenv("ENDPOINT")
+	if ep != "" {
+		endpoint = ep
+	}
+}
 
 func newGateway(ctx context.Context, opts ...runtime.ServeMuxOption) (http.Handler, error) {
 	mux := runtime.NewServeMux(opts...)
