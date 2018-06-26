@@ -1,35 +1,50 @@
-version: '2'
+version: '2.4'
 services:
+
+  gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile-gateway
+    networks:
+      - front-proxy
+    expose:
+      - "3000"
+    ports:
+      - "3000:3000"
+    environment:
+      - ENDPOINT=front-proxy:8000
 
   front-envoy:
     build:
       context: .
       dockerfile: Dockerfile-frontenvoy
+    container_name: front-proxy
     volumes:
       - ./front-envoy.yaml:/etc/front-envoy.yaml
     networks:
       - front-proxy
     expose:
-      - "80"
+      - "8000"
       - "8001"
-    ports:
-      - "8000:80"
-      - "8001:8001"
 
-  service1:
+  grpc1:
     build:
       context: .
-      dockerfile: Dockerfile-service
-    volumes:
-      - ./service-envoy.yaml:/etc/service-envoy.yaml
+      dockerfile: Dockerfile-grpc
+    container_name: grpc1
     networks:
-      envoymesh:
-        aliases:
-          - service1
-    environment:
-      - SERVICE_NAME=1
+      - front-proxy
     expose:
-      - "80"
+      - "8080"
+  grpc2:
+    build:
+      context: .
+      dockerfile: Dockerfile-grpc
+    container_name: grpc2
+    networks:
+      - front-proxy
+    expose:
+      - "8080"
 
 networks:
   front-proxy: {}
