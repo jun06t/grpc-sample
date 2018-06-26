@@ -21,6 +21,10 @@ static_resources:
                   prefix: "*"
                 route:
                   cluster: grpc
+          access_log:
+          - name: envoy.file_access_log
+            config:
+              path: "/dev/stdout"
           http_filters:
           - name: envoy.router
             config: {}
@@ -30,6 +34,12 @@ static_resources:
     type: strict_dns
     lb_policy: round_robin
     http2_protocol_options: {}
+    health_checks:
+    - timeout: 5s
+      interval: 10s
+      unhealthy_threshold: 2
+      healthy_threshold: 2
+      tcp_health_check: {}
     hosts:
     - socket_address:
         address: grpc1
