@@ -27,25 +27,16 @@ services:
       - "8000"
       - "8001"
     ports:
-      - "8000:8000"
       - "8001:8001"
 
-  grpc1:
+  grpc:
     build:
       context: .
       dockerfile: Dockerfile-grpc
-    container_name: grpc1
     networks:
-      - front-proxy
-    expose:
-      - "8080"
-  grpc2:
-    build:
-      context: .
-      dockerfile: Dockerfile-grpc
-    container_name: grpc2
-    networks:
-      - front-proxy
+      front-proxy:
+        aliases:
+          - backend
     expose:
       - "8080"
 

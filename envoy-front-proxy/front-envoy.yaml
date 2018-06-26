@@ -18,7 +18,7 @@ static_resources:
               - "*"
               routes:
               - match:
-                  prefix: "*"
+                  prefix: "/"
                 route:
                   cluster: grpc
           access_log:
@@ -42,10 +42,7 @@ static_resources:
       tcp_health_check: {}
     hosts:
     - socket_address:
-        address: grpc1
-        port_value: 8080
-    - socket_address:
-        address: grpc2
+        address: backend
         port_value: 8080
 admin:
   access_log_path: /dev/null
