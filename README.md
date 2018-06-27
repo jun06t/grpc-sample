@@ -9,4 +9,4 @@ gRPC Samples
 - [Client streaming gRPC](https://github.com/jun06t/grpc-sample/tree/master/client-streaming)
 - [Bidirectional streaming gRPC](https://github.com/jun06t/grpc-sample/tree/master/bidirectional-streaming)
 - [gRPC Gateway](https://github.com/jun06t/grpc-sample/tree/master/grpc-gateway)
-
+- [Envoy Front Proxy](https://github.com/jun06t/grpc-sample/tree/master/envoy-front-proxy)

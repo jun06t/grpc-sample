@@ -1,19 +1,17 @@
-# gRPC Gateway sample
+# Envoy front proxy sample
 
-## Compile
+## Run servers
 ```
-protoeasy --go --go-import-path=github.com/jun06t/grpc-sample/grpc-gateway/proto --grpc --grpc-gateway ./proto
-```
-
-## Run gRPC server
-```
-go run server/main.go
+docker-compose up -d
 ```
 
-## Run gRPC Gateway
+## Scale out backend servers
 ```
-go run gateway/main.go
+docker-compose up --scale grpc=3
 ```
+
+## Confirm Admin statistics
+http://localhost:8001
 
 ## Send Request
 ### Alive
@@ -21,19 +19,9 @@ go run gateway/main.go
 curl http://localhost:3000/alive
 ```
 
-This returns
-```
-{"status":true}
-```
-
 ### Get User
 ```
 curl http://localhost:3000/user/100
-```
-
-This returns
-```
-{"id":"100","name":"Alice","age":20}
 ```
 
 ### Get Users By Group
@@ -41,17 +29,7 @@ This returns
 curl http://localhost:3000/user?group=ADMIN
 ```
 
-This returns
-```
-{"group":"ADMIN","users":[{"name":"Alice","age":20},{"name":"Bob","age":24}]}
-```
-
 ### Update User
 ```
 curl -XPUT http://localhost:3000/user/100 -d '{"name": "bob", "age": 16}'
-```
-
-Then the grpc server's stdout shows
-```
-2017/11/14 14:25:52 update body is {id: 100, name: bob, age: 16}
 ```
