@@ -6,7 +6,9 @@ services:
       context: .
       dockerfile: Dockerfile-gateway
     networks:
-      - front-proxy
+      service-mesh:
+        aliases:
+          - gateway
     expose:
       - "3000"
     ports:
@@ -14,15 +16,15 @@ services:
     environment:
       - ENDPOINT=front-proxy:8000
 
-  front-envoy:
+  gateway-sidecar: &sidecar
     build:
       context: .
-      dockerfile: Dockerfile-frontenvoy
+      dockerfile: Dockerfile-sidecar
     container_name: front-proxy
     volumes:
-      - ./front-envoy.yaml:/etc/front-envoy.yaml
+      - ./gateway-sidecar.yaml:/etc/sidecar-envoy.yaml
     networks:
-      - front-proxy
+      - service-mesh
     expose:
       - "8000"
       - "8001"
@@ -34,11 +36,18 @@ services:
       context: .
       dockerfile: Dockerfile-grpc
     networks:
-      front-proxy:
+      service-mesh:
         aliases:
           - backend
     expose:
       - "8080"
 
+  grpc-sidecar:
+    <<: *sidecar
+    volumes:
+      - ./grpc-sidecar.yaml:/etc/sidecar-envoy.yaml
+    ports:
+      - "8002:8001"
+
 networks:
-  front-proxy: {}
+  service-mesh: {}
