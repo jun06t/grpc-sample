@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "alive.proto";
+
+package gateway;
+
+service UserService {
+  rpc GetUser(GetUserRequest) returns (UserResponse) {
+    option (google.api.http) = {
+      get: "/user/{id}"
+    };
+  }
+
+  rpc GetUsersByGroup(UserGroupRequest) returns (UsersResponse) {
+    option (google.api.http) = {
+      get: "/user"
+    };
+  }
+
+  rpc UpdateUser(UpdateUserRequest) returns (Empty) {
+    option (google.api.http) = {
+      put: "/user/{id}"
+      body: "*"
+    };
+  }
+}
+
+message GetUserRequest {
+  string id = 1;
+}
+
+message UpdateUserRequest {
+  string id = 1;
+  string name = 2;
+  int32 age = 3;
+}
+
+message UserResponse {
+  string id = 1;
+  string name =  2;
+  int32 age =  3;
+}
+
+enum Group {
+  USER = 0;
+  ADMIN = 1;
+  DEVELOPER = 2;
+}
+
+message UserGroupRequest {
+  Group group = 1;
+}
+
+message UsersResponse {
+  Group group = 1;
+  repeated UserResponse users = 2;
+}
+
