@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	_ "net/http/pprof"
 	"os"
@@ -12,7 +13,8 @@ import (
 )
 
 var (
-	endpoint = "localhost:8080"
+	endpoint   = "localhost:8080"
+	listenAddr = ":3000"
 )
 
 func init() {
@@ -25,6 +27,8 @@ func init() {
 func newGateway(ctx context.Context, opts ...runtime.ServeMuxOption) (http.Handler, error) {
 	mux := runtime.NewServeMux(opts...)
 	dialOpts := []grpc.DialOption{grpc.WithInsecure()}
+
+	fmt.Println("Endpoint: ", endpoint)
 	conn, err := grpc.Dial(endpoint, dialOpts...)
 	if err != nil {
 		return nil, err
@@ -56,7 +60,8 @@ func Run(address string, opts ...runtime.ServeMuxOption) error {
 }
 
 func main() {
-	if err := Run(":3000"); err != nil {
+	fmt.Println("Listen Address:", listenAddr)
+	if err := Run(listenAddr); err != nil {
 		panic(err)
 	}
 }

@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net"
 
@@ -45,6 +46,7 @@ func (s *userService) UpdateUser(ctx context.Context, in *pb.UpdateUserRequest) 
 }
 
 func main() {
+	fmt.Println("Listen Address:", port)
 	lis, err := net.Listen("tcp", port)
 	if err != nil {
 		log.Fatal(err)
