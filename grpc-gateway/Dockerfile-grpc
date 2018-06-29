@@ -1,7 +1,11 @@
 FROM golang:1.10-alpine
 
-COPY . /go/src
-WORKDIR /go/src
+ARG REPO="github.com/jun06t/grpc-sample/grpc-gateway"
+
+RUN mkdir -p /go/src/${REPO}
+COPY . /go/src/${REPO}
+
+WORKDIR /go/src/${REPO}
 
 RUN go build -o main ./server/main.go
 
