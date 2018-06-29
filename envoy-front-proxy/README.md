@@ -1,10 +1,5 @@
 # Envoy front proxy sample
 
-## Prepare Dependencies
-```
-dep ensure -v
-```
-
 ## Run servers
 ```
 docker-compose up -d
