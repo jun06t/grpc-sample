@@ -7,8 +7,9 @@ COPY . /go/src/${REPO}
 
 WORKDIR /go/src/${REPO}
 
-RUN go build -o main ./server/main.go
+RUN go build -o grpc-backend ./gateway/main.go && \
+  mv grpc-backend /usr/local/bin/
 
 EXPOSE 8080
 
-CMD ["/go/src/main"]
+CMD ["grpc-backend"]
