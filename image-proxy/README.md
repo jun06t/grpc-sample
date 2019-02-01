@@ -1,29 +1,32 @@
-# Client Streaming gRPC sample
+# Image proxy sample
+
+This is a proxy to convert jpeg/png to webp.
 
 ## Compile
 ```
-protoeasy --go --grpc ./proto
+$ protoeasy --go --grpc ./proto
+```
+
+## Prepare
+You should install webp tool because this proxy runs ``cwebp`` command directly.
+```
+$ brew install webp
 ```
 
 ## Run gRPC server
 ```
-cd server
-go run main.go
+$ cd server
+$ go run main.go
 ```
 
 ## Run gRRC Client
 ```
-cd client
-go run main.go
+$ cd client
+$ go run main.go
 ```
 
-Then it returns the following messages every second.
-```
-2017/11/14 14:37:10 success
-```
-
-And the server's directory has had uploaded image now.
+Then you'll get webp image on client directory.
 ```
 $ ls
-main.go      supercar.jpg
+001.webp      main.go       testimage.png
 ```

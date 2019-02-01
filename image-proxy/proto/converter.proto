@@ -18,6 +18,7 @@ message Meta {
   string type    = 2;
   string quality = 3;
 }
+
 message Chunk {
   bytes data     = 1;
   int64 position = 2;
