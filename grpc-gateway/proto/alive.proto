@@ -15,6 +15,5 @@ service AliveService {
 message Empty {}
 
 message AliveResponse {
-  bool status =  1;
+  bool status = 1;
 }
-

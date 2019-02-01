@@ -31,20 +31,20 @@ message GetUserRequest {
 }
 
 message UpdateUserRequest {
-  string id = 1;
+  string id   = 1;
   string name = 2;
-  int32 age = 3;
+  int32  age  = 3;
 }
 
 message UserResponse {
-  string id = 1;
-  string name =  2;
-  int32 age =  3;
+  string id   = 1;
+  string name = 2;
+  int32  age  = 3;
 }
 
 enum Group {
-  USER = 0;
-  ADMIN = 1;
+  USER      = 0;
+  ADMIN     = 1;
   DEVELOPER = 2;
 }
 
@@ -53,7 +53,6 @@ message UserGroupRequest {
 }
 
 message UsersResponse {
-  Group group = 1;
+  Group    group              = 1;
   repeated UserResponse users = 2;
 }
-
