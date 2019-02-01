@@ -3,7 +3,7 @@ syntax = "proto3";
 package feed;
 
 service Feeder {
-  rpc GetNewFeed (Empty) returns (stream FeedResponse) {}
+  rpc GetNewFeed(Empty) returns (stream FeedResponse) {}
 }
 
 message Empty {}
