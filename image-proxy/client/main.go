@@ -21,7 +21,7 @@ func main() {
 	}
 	defer conn.Close()
 
-	client := pb.NewUploaderClient(conn)
+	client := pb.NewConverterClient(conn)
 
 	file, err := os.Open("supercar.jpg")
 	if err != nil {
@@ -35,13 +35,13 @@ func main() {
 	}
 }
 
-func upload(client pb.UploaderClient, file *os.File) error {
-	stream, err := client.Upload(context.Background())
+func upload(client pb.ConverterClient, file *os.File) error {
+	stream, err := client.Convert(context.Background())
 	if err != nil {
 		return err
 	}
-	meta := &pb.UploadRequest{
-		Value: &pb.UploadRequest_Meta{Meta: &pb.Meta{Id: "001", Type: "", Quality: "90"}},
+	meta := &pb.ConvertRequest{
+		Value: &pb.ConvertRequest_Meta{Meta: &pb.Meta{Id: "001", Type: "", Quality: "90"}},
 	}
 	stream.Send(meta)
 
@@ -55,8 +55,8 @@ func upload(client pb.UploaderClient, file *os.File) error {
 			return err
 		}
 
-		data := &pb.UploadRequest{
-			Value: &pb.UploadRequest_Chunk{Chunk: &pb.Chunk{Data: buf, Position: int64(n)}},
+		data := &pb.ConvertRequest{
+			Value: &pb.ConvertRequest_Chunk{Chunk: &pb.Chunk{Data: buf, Position: int64(n)}},
 		}
 		stream.Send(data)
 	}

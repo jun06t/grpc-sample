@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-package upload;
+package converter;
 
-service Uploader {
-  rpc Upload(stream UploadRequest) returns (UploadResponse) {}
+service Converter {
+  rpc Convert(stream ConvertRequest) returns (ConvertResponse) {}
 }
 
-message UploadRequest {
+message ConvertRequest {
   oneof value {
     Meta  meta  = 1;
     Chunk chunk = 2;
@@ -23,6 +23,6 @@ message Chunk {
   int64 position = 2;
 }
 
-message UploadResponse {
+message ConvertResponse {
   string status = 1;
 }

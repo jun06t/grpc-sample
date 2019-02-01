@@ -17,7 +17,7 @@ const (
 
 type server struct{}
 
-func (s *server) Upload(stream pb.Uploader_UploadServer) error {
+func (s *server) Convert(stream pb.Converter_ConvertServer) error {
 	var (
 		file *os.File
 		err  error
@@ -42,7 +42,7 @@ func (s *server) Upload(stream pb.Uploader_UploadServer) error {
 		}
 	}
 
-	err = stream.SendAndClose(&pb.UploadResponse{"success"})
+	err = stream.SendAndClose(&pb.ConvertResponse{"success"})
 	if err != nil {
 		return err
 	}
@@ -57,7 +57,7 @@ func main() {
 	}
 
 	s := grpc.NewServer()
-	pb.RegisterUploaderServer(s, new(server))
+	pb.RegisterConverterServer(s, new(server))
 	err = s.Serve(lis)
 	if err != nil {
 		log.Fatal(err)
