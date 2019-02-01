@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"io"
 	"log"
 	"os"
@@ -23,25 +24,39 @@ func main() {
 
 	client := pb.NewConverterClient(conn)
 
+	err = convert(client)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func convert(client pb.ConverterClient) error {
 	file, err := os.Open("supercar.jpg")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer file.Close()
 
-	err = upload(client, file)
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
-func upload(client pb.ConverterClient, file *os.File) error {
 	stream, err := client.Convert(context.Background())
 	if err != nil {
 		return err
 	}
+	err = send(stream, file, "001")
+	if err != nil {
+		return err
+	}
+
+	err = receive(stream, "001")
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func send(stream pb.Converter_ConvertClient, file *os.File, id string) error {
 	meta := &pb.ConvertRequest{
-		Value: &pb.ConvertRequest_Meta{Meta: &pb.Meta{Id: "001", Type: "", Quality: "90"}},
+		Value: &pb.ConvertRequest_Meta{Meta: &pb.Meta{Id: id, Type: "jpg", Quality: "90"}},
 	}
 	stream.Send(meta)
 
@@ -61,11 +76,31 @@ func upload(client pb.ConverterClient, file *os.File) error {
 		stream.Send(data)
 	}
 
-	resp, err := stream.CloseAndRecv()
+	err := stream.CloseSend()
 	if err != nil {
 		return err
 	}
 
-	log.Println(resp.Status)
+	return nil
+}
+
+func receive(stream pb.Converter_ConvertClient, id string) error {
+	file, err := os.Create(fmt.Sprintf("%s.webp", id))
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	for {
+		resp, err := stream.Recv()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			return err
+		}
+		file.Write(resp.Data)
+	}
+
 	return nil
 }

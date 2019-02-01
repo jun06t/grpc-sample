@@ -3,7 +3,7 @@ syntax = "proto3";
 package converter;
 
 service Converter {
-  rpc Convert(stream ConvertRequest) returns (ConvertResponse) {}
+  rpc Convert(stream ConvertRequest) returns (stream ConvertResponse) {}
 }
 
 message ConvertRequest {
@@ -24,5 +24,6 @@ message Chunk {
 }
 
 message ConvertResponse {
-  string status = 1;
+  bytes data     = 1;
+  int64 position = 2;
 }
