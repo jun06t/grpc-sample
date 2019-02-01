@@ -31,7 +31,7 @@ func main() {
 }
 
 func convert(client pb.ConverterClient) error {
-	file, err := os.Open("supercar.jpg")
+	file, err := os.Open("testimage.png")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -54,13 +54,17 @@ func convert(client pb.ConverterClient) error {
 	return nil
 }
 
+const (
+	bufSize = 1024
+)
+
 func send(stream pb.Converter_ConvertClient, file *os.File, id string) error {
 	meta := &pb.ConvertRequest{
-		Value: &pb.ConvertRequest_Meta{Meta: &pb.Meta{Id: id, Type: "jpg", Quality: "90"}},
+		Value: &pb.ConvertRequest_Meta{Meta: &pb.Meta{Id: id, Type: "png", Quality: "90"}},
 	}
 	stream.Send(meta)
 
-	buf := make([]byte, 1024)
+	buf := make([]byte, bufSize)
 	for {
 		n, err := file.Read(buf)
 		if err == io.EOF {

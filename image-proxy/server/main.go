@@ -40,7 +40,7 @@ func (s *server) Convert(stream pb.Converter_ConvertServer) error {
 
 	dst := fmt.Sprintf("%s.webp", id)
 
-	cmd := exec.Command("cwebp", "-quiet", "-q", qa, "-o", dst, src)
+	cmd := exec.Command("cwebp", "-quiet", "-mt", "-q", qa, "-o", dst, src)
 	err = cmd.Run()
 	if err != nil {
 		return err
@@ -70,7 +70,8 @@ func receive(stream pb.Converter_ConvertServer) (string, string, string, error) 
 			return "", "", "", err
 		}
 		if meta := resp.GetMeta(); meta != nil {
-			name = fmt.Sprintf("%s.%s", meta.Id, meta.Type)
+			id = meta.Id
+			name = fmt.Sprintf("%s.%s", id, meta.Type)
 			qa = meta.Quality
 			file, err = os.Create(name)
 			if err != nil {
