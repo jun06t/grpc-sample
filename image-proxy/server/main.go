@@ -2,7 +2,6 @@ package main
 
 import (
 	"bytes"
-	"fmt"
 	"io"
 	"log"
 	"net"
@@ -46,7 +45,9 @@ func (s *server) Convert(stream pb.Converter_ConvertServer) error {
 		return err
 	}
 
-	src := fmt.Sprintf("%s.%s", m.id, m.format)
+	// NOTE: generate uuid when each call
+	uuid := "uuid-"
+	src := uuid + "src"
 	defer os.Remove(src)
 
 	err = writeOrg(src, buf)
@@ -54,7 +55,7 @@ func (s *server) Convert(stream pb.Converter_ConvertServer) error {
 		return err
 	}
 
-	dst := fmt.Sprintf("%s.webp", m.id)
+	dst := uuid + "dst"
 	defer os.Remove(dst)
 
 	cmd := exec.Command("cwebp", "-quiet", "-mt", "-q", m.qa, "-o", dst, src)
@@ -83,9 +84,7 @@ var pool = sync.Pool{
 }
 
 type meta struct {
-	id     string
-	format string
-	qa     string
+	qa string
 }
 
 func receive(stream pb.Converter_ConvertServer, w io.Writer) (meta, error) {
@@ -100,8 +99,6 @@ func receive(stream pb.Converter_ConvertServer, w io.Writer) (meta, error) {
 		}
 
 		if mt := resp.GetMeta(); mt != nil {
-			m.id = mt.Id
-			m.format = mt.Type
 			m.qa = mt.Quality
 		}
 		if chunk := resp.GetChunk(); chunk != nil {
