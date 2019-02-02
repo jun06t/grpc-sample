@@ -24,29 +24,35 @@ func main() {
 
 	client := pb.NewConverterClient(conn)
 
-	err = convert(client)
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
-func convert(client pb.ConverterClient) error {
 	file, err := os.Open("testimage.png")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer file.Close()
 
+	err = convert(client, file, "001")
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func convert(client pb.ConverterClient, src io.Reader, name string) error {
 	stream, err := client.Convert(context.Background())
 	if err != nil {
 		return err
 	}
-	err = send(stream, file, "001")
+	err = send(stream, src, name)
 	if err != nil {
 		return err
 	}
 
-	err = receive(stream, "001")
+	dst, err := os.Create(fmt.Sprintf("%s.webp", name))
+	if err != nil {
+		return err
+	}
+	defer dst.Close()
+
+	err = receive(stream, dst)
 	if err != nil {
 		return err
 	}
@@ -58,7 +64,7 @@ const (
 	bufSize = 1024
 )
 
-func send(stream pb.Converter_ConvertClient, file *os.File, id string) error {
+func send(stream pb.Converter_ConvertClient, src io.Reader, id string) error {
 	meta := &pb.ConvertRequest{
 		Value: &pb.ConvertRequest_Meta{Meta: &pb.Meta{Id: id, Type: "png", Quality: "90"}},
 	}
@@ -66,7 +72,7 @@ func send(stream pb.Converter_ConvertClient, file *os.File, id string) error {
 
 	buf := make([]byte, bufSize)
 	for {
-		n, err := file.Read(buf)
+		n, err := src.Read(buf)
 		if err == io.EOF {
 			break
 		}
@@ -77,7 +83,10 @@ func send(stream pb.Converter_ConvertClient, file *os.File, id string) error {
 		data := &pb.ConvertRequest{
 			Value: &pb.ConvertRequest_Chunk{Chunk: &pb.Chunk{Data: buf, Position: int64(n)}},
 		}
-		stream.Send(data)
+		err = stream.Send(data)
+		if err != nil {
+			return err
+		}
 	}
 
 	err := stream.CloseSend()
@@ -88,13 +97,7 @@ func send(stream pb.Converter_ConvertClient, file *os.File, id string) error {
 	return nil
 }
 
-func receive(stream pb.Converter_ConvertClient, id string) error {
-	file, err := os.Create(fmt.Sprintf("%s.webp", id))
-	if err != nil {
-		return err
-	}
-	defer file.Close()
-
+func receive(stream pb.Converter_ConvertClient, dst io.Writer) error {
 	for {
 		resp, err := stream.Recv()
 		if err == io.EOF {
@@ -103,7 +106,10 @@ func receive(stream pb.Converter_ConvertClient, id string) error {
 		if err != nil {
 			return err
 		}
-		file.Write(resp.Data)
+		_, err = dst.Write(resp.Data)
+		if err != nil {
+			return err
+		}
 	}
 
 	return nil
