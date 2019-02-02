@@ -49,7 +49,7 @@ func (s *server) Convert(stream pb.Converter_ConvertServer) error {
 	src := fmt.Sprintf("%s.%s", m.id, m.format)
 	defer os.Remove(src)
 
-	err = writeOrg(src, buf.Bytes())
+	err = writeOrg(src, buf)
 	if err != nil {
 		return err
 	}
@@ -63,7 +63,12 @@ func (s *server) Convert(stream pb.Converter_ConvertServer) error {
 		return err
 	}
 
-	err = send(stream, dst)
+	file, err := os.Open(dst)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+	err = send(stream, file)
 	if err != nil {
 		return err
 	}
@@ -110,13 +115,13 @@ func receive(stream pb.Converter_ConvertServer, w io.Writer) (meta, error) {
 	return m, nil
 }
 
-func writeOrg(name string, b []byte) error {
+func writeOrg(name string, src io.Reader) error {
 	file, err := os.Create(name)
 	if err != nil {
 		return err
 	}
 	defer file.Close()
-	_, err = file.Write(b)
+	_, err = io.Copy(file, src)
 	if err != nil {
 		return err
 	}
@@ -124,16 +129,10 @@ func writeOrg(name string, b []byte) error {
 	return nil
 }
 
-func send(stream pb.Converter_ConvertServer, filename string) error {
-	file, err := os.Open(filename)
-	if err != nil {
-		return err
-	}
-	defer file.Close()
-
+func send(stream pb.Converter_ConvertServer, r io.Reader) error {
 	buf := make([]byte, 1024)
 	for {
-		n, err := file.Read(buf)
+		n, err := r.Read(buf)
 		if err == io.EOF {
 			break
 		}
