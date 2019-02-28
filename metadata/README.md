@@ -15,7 +15,15 @@ go run server/main.go
 go run client/main.go
 ```
 
-Then it returns
+Then client says;
 ```
-2017/11/14 14:31:42 Reply:  Hello alice
+2019/02/28 12:44:34 Reply:  Hello alice
+2019/02/28 12:44:34 Header: map[content-type:[application/grpc] timestamp:[Feb 28 12:44:34.956833000]]
+2019/02/28 12:44:34 Trailer: map[timestamp:[Feb 28 12:44:34.956868000]]
+```
+
+And server says;
+```
+request id from metadata:
+ 0. dwToyxFrRj969BcUDe7dc9
 ```
