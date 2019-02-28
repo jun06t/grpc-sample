@@ -7,6 +7,7 @@ import (
 	"net"
 	"time"
 
+	"github.com/jun06t/grpc-sample/metadata/interceptor"
 	pb "github.com/jun06t/grpc-sample/metadata/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
@@ -17,6 +18,11 @@ import (
 const (
 	port = ":8080"
 )
+
+func main() {
+	//run()
+	runWithInterceptor()
+}
 
 type server struct{}
 
@@ -43,7 +49,13 @@ func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloRe
 	return &pb.HelloReply{Message: "Hello " + in.Name}, nil
 }
 
-func main() {
+type serverWithInterceptor struct{}
+
+func (s *serverWithInterceptor) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
+	return &pb.HelloReply{Message: "Hello " + in.Name}, nil
+}
+
+func run() {
 	lis, err := net.Listen("tcp", port)
 	if err != nil {
 		log.Fatal(err)
@@ -51,6 +63,22 @@ func main() {
 
 	s := grpc.NewServer()
 	pb.RegisterGreeterServer(s, &server{})
+	err = s.Serve(lis)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func runWithInterceptor() {
+	lis, err := net.Listen("tcp", port)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	s := grpc.NewServer(
+		grpc.UnaryInterceptor(interceptor.ServerInterceptor),
+	)
+	pb.RegisterGreeterServer(s, &serverWithInterceptor{})
 	err = s.Serve(lis)
 	if err != nil {
 		log.Fatal(err)

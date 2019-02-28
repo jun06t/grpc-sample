@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 
+	"github.com/jun06t/grpc-sample/metadata/interceptor"
 	pb "github.com/jun06t/grpc-sample/metadata/proto"
 	"github.com/lithammer/shortuuid"
 	"google.golang.org/grpc"
@@ -15,7 +16,15 @@ const (
 )
 
 func main() {
-	conn, err := grpc.Dial(address, grpc.WithInsecure())
+	run()
+	runWithInterceptor()
+}
+
+func run() {
+	conn, err := grpc.Dial(
+		address,
+		grpc.WithInsecure(),
+	)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -36,6 +45,29 @@ func main() {
 	log.Println("Reply: ", resp.Message)
 	log.Printf("Header: %+v\n", header)
 	log.Printf("Trailer: %+v\n", trailer)
+}
+
+func runWithInterceptor() {
+	conn, err := grpc.Dial(
+		address,
+		grpc.WithInsecure(),
+		grpc.WithUnaryInterceptor(interceptor.ClientInterceptor),
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer conn.Close()
+
+	c := pb.NewGreeterClient(conn)
+
+	req := &pb.HelloRequest{
+		Name: "alice",
+	}
+	resp, err := c.SayHello(context.Background(), req)
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Println("Reply: ", resp.Message)
 }
 
 func setRequestID(ctx context.Context) context.Context {
