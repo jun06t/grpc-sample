@@ -9,9 +9,9 @@ import (
 
 	pb "github.com/jun06t/grpc-sample/metadata/proto"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
-	"grpc.go4.org/codes"
-	"grpc.go4.org/metadata"
 )
 
 const (
@@ -31,7 +31,7 @@ func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloRe
 	// Read metadata from client.
 	md, ok := metadata.FromIncomingContext(ctx)
 	if !ok {
-		return nil, status.Errorf(codes.DataLoss, "UnaryEcho: failed to get metadata")
+		return nil, status.Errorf(codes.DataLoss, "UnarySayHello: failed to get metadata")
 	}
 	if t, ok := md["x-request-id"]; ok {
 		fmt.Printf("request id from metadata:\n")
