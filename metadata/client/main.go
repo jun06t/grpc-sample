@@ -51,7 +51,7 @@ func runWithInterceptor() {
 	conn, err := grpc.Dial(
 		address,
 		grpc.WithInsecure(),
-		grpc.WithUnaryInterceptor(interceptor.ClientInterceptor),
+		grpc.WithUnaryInterceptor(interceptor.ClientInterceptor()),
 	)
 	if err != nil {
 		log.Fatal(err)
