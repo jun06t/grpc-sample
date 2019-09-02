@@ -4,7 +4,7 @@ This is a proxy to convert jpeg/png to webp.
 
 ## Compile
 ```
-$ protoeasy --go --grpc ./proto
+$ make proto
 ```
 
 ## Prepare
