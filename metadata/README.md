@@ -2,7 +2,7 @@
 
 ## Compile
 ```
-protoeasy --go --grpc ./proto
+make proto
 ```
 
 ## Run gRPC server
