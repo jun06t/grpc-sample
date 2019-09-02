@@ -1,4 +1,4 @@
-.PHONY: prepare build
+.PHONY: prepare build proto
 
 REGISTRY_DOMAIN := jun06t
 
@@ -12,3 +12,11 @@ build:
 push:
 	docker push ${REGISTRY_DOMAIN}/grpc-gateway
 	docker push ${REGISTRY_DOMAIN}/grpc-backend
+
+proto:
+	protoc \
+	-I=./proto \
+	-I=${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
+	--go_out=plugins=grpc:./proto \
+	--grpc-gateway_out=logtostderr=true:./proto \
+	./proto/*.proto

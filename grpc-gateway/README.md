@@ -2,7 +2,7 @@
 
 ## Compile
 ```
-protoeasy --go --go-import-path=github.com/jun06t/grpc-sample/grpc-gateway/proto --grpc --grpc-gateway ./proto
+make proto
 ```
 
 ## Run gRPC server
