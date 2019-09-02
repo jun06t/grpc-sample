@@ -5,8 +5,8 @@ import (
 	"log"
 	"net"
 
+	"github.com/golang/protobuf/ptypes/any"
 	pb "github.com/jun06t/grpc-sample/duplicate/proto"
-	google_protobuf "go.pedge.io/pb/go/google/protobuf"
 	"google.golang.org/grpc"
 )
 
@@ -16,7 +16,7 @@ const (
 
 type server struct{}
 
-func (s *server) SayHello(ctx context.Context, in *google_protobuf.Any) (*pb.HelloReply, error) {
+func (s *server) SayHello(ctx context.Context, in *any.Any) (*pb.HelloReply, error) {
 	return &pb.HelloReply{Message: "Hello "}, nil
 }
 
