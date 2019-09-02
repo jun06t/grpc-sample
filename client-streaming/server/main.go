@@ -34,7 +34,7 @@ func (s *server) Upload(stream pb.Uploader_UploadServer) error {
 		file.Write(resp.Data)
 	}
 
-	err = stream.SendAndClose(&pb.UploadResponse{"success"})
+	err = stream.SendAndClose(&pb.UploadResponse{Status: "success"})
 	if err != nil {
 		return err
 	}
