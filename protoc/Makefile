@@ -1,4 +1,4 @@
-.PHONY: proto proto_format
+.PHONY: proto_basic proto_patah proto_plugin proto_format
 
 proto_basic:
 	protoc \
