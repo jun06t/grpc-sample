@@ -1,0 +1,7 @@
+syntax = "proto3";
+package path;
+
+message Device {
+  string id   = 1;
+  string name = 2;
+}
