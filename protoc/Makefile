@@ -12,6 +12,12 @@ proto_path:
 	--go_out=./path \
 	./path/*.proto
 
+proto_plugin:
+	protoc \
+	-I=./plugin \
+	--go_out=plugins=grpc:./plugin \
+	./plugin/*.proto
+
 proto_format:
 	find ./basic/ -name "*.proto" | xargs clang-format -i
 	find ./path/ -name "*.proto" | xargs clang-format -i
