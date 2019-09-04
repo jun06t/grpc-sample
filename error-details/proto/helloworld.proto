@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package helloworld;
+
+service Greeter {
+  rpc SayHello(HelloRequest) returns (HelloReply) {}
+}
+
+message HelloRequest {
+  string name = 1;
+}
+
+message HelloReply {
+  string message = 1;
+}
+
+enum ErrorCode {
+  UNKNOWN         = 0;
+  INVALID_RECEIPT = 1;
+  EXPIRED_RECEIPT = 2;
+  INVALID_CARD    = 3;
+  EXPIRED_CARD    = 4;
+  INVALID_COUNTRY = 5;
+  PREPAID_COUNTRY = 6;
+}
+
+message ErrorDetail {
+  ErrorCode code    = 1;
+  string    message = 2;
+}
