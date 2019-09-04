@@ -42,6 +42,8 @@ func handleError(err error) {
 		switch t := detail.(type) {
 		case *errdetails.BadRequest:
 			fmt.Println("handle BadRequest case")
+		case *errdetails.QuotaFailure:
+			fmt.Println("handle QuotaFailure case")
 		case *pb.ErrorDetail:
 			// handle original error code
 			fmt.Println("error code:", t.Code)

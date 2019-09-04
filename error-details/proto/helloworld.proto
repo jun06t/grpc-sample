@@ -21,7 +21,7 @@ enum ErrorCode {
   INVALID_CARD    = 3;
   EXPIRED_CARD    = 4;
   INVALID_COUNTRY = 5;
-  PREPAID_COUNTRY = 6;
+  PREPAID_CARD    = 6;
 }
 
 message ErrorDetail {
