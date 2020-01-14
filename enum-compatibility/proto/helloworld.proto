@@ -13,17 +13,18 @@ message HelloRequest {
 message HelloReply {
   string message = 1;
   /*
-      enum Role {
-        NONE     = 0;
-        STANDARD = 1;
-        PREMIUM  = 2;
-        ULTIMATE = 3;
-      }
+    enum Role {
+      NONE     = 0;
+      STANDARD = 1;
+      PREMIUM  = 2;
+      ULTIMATE = 3;
+    }
+    Role role = 2;
   */
-  Role role = 2;
+  RoleType role = 2;
 }
 
-enum Role {
+enum RoleType {
   NONE     = 0;
   STANDARD = 1;
   PREMIUM  = 2;

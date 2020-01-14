@@ -18,7 +18,7 @@ type server struct{}
 func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
 	return &pb.HelloReply{
 		Message: "Hello " + in.Name,
-		Role:    pb.Role_ULTIMATE,
+		Role:    pb.RoleType_ULTIMATE,
 	}, nil
 }
 
