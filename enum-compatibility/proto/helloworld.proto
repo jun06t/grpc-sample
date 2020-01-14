@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package helloworld;
+
+service Greeter {
+  rpc SayHello(HelloRequest) returns (HelloReply) {}
+}
+
+message HelloRequest {
+  string name = 1;
+}
+
+message HelloReply {
+  string message = 1;
+  /*
+      enum Role {
+        NONE     = 0;
+        STANDARD = 1;
+        PREMIUM  = 2;
+        ULTIMATE = 3;
+      }
+  */
+  Role role = 2;
+}
+
+enum Role {
+  NONE     = 0;
+  STANDARD = 1;
+  PREMIUM  = 2;
+  ULTIMATE = 3;
+}
