@@ -8,7 +8,6 @@ COPY . /go/src/${REPO}
 
 WORKDIR /go/src/${REPO}
 
-RUN go build -o client ./client/main.go && \
-  mv client /usr/local/bin/
+RUN cd client && go build && mv client /usr/local/bin
 
 CMD ["client"]

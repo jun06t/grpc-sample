@@ -8,9 +8,6 @@ COPY . /go/src/${REPO}
 
 WORKDIR /go/src/${REPO}
 
-RUN go build -o server ./server/main.go && \
-  mv server /usr/local/bin/
-
-EXPOSE 8080
+RUN cd server && go build && mv server /usr/local/bin
 
 CMD ["server"]
