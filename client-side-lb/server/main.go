@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net"
 
@@ -24,6 +25,7 @@ func init() {
 type server struct{}
 
 func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
+	fmt.Println("request body: ", in.Name)
 	return &pb.HelloReply{
 		Message:   "Hello " + in.Name,
 		MachineId: machine,

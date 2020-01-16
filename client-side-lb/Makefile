@@ -1,5 +1,7 @@
 .PHONY: proto proto_format
 
+REGISTRY_DOMAIN := jun06t
+
 build:
 	docker build -f Dockerfile-client -t ${REGISTRY_DOMAIN}/client-side-lb:client .
 	docker build -f Dockerfile-server -t ${REGISTRY_DOMAIN}/client-side-lb:server .
