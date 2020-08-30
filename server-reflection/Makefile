@@ -18,6 +18,12 @@ gofastproto: proto_format
 	--gofast_out=plugins=grpc:./proto \
 	./proto/*.proto
 
+gogofastproto: proto_format
+	protoc \
+	-I=./proto \
+	--gogofast_out=plugins=grpc:./proto \
+	./proto/*.proto
+
 proto_format:
 	find ./proto/ -name "*.proto" | xargs clang-format -i
 
