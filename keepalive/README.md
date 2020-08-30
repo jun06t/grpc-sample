@@ -7,12 +7,12 @@ make proto
 
 ## Run gRPC server
 ```
-go run server/main.go
+GODEBUG=http2debug=2 go run server/main.go
 ```
 
 ## Run gRRC Client
 ```
-go run client/main.go
+GODEBUG=http2debug=2 go run client/main.go
 ```
 
 Then it returns
