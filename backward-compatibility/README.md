@@ -1,4 +1,4 @@
-# Unary(Simple) gRPC sample
+# Backward compatibility sample
 
 ## Compile
 ```
