@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package helloworld;
+
+service Greeter {
+  rpc SayHello(HelloRequest) returns (HelloReply) {}
+}
+
+message HelloRequest {
+  string name = 1;
+}
+
+message HelloReply {
+  string  message = 1;
+  // Nested nested = 2;
+  Renamed renamed = 2;
+}
+
+message Nested {
+  int64   amount = 1;
+  string  name   = 2;
+  message Term {
+    int64 startAt = 1;
+    int64 endAt   = 2;
+  }
+  Term term = 3;
+}
+
+message Renamed {
+  int64   amount = 1;
+  string  name   = 2;
+  message Term {
+    int64 startAt = 1;
+    int64 endAt   = 2;
+  }
+  Term term = 3;
+}
