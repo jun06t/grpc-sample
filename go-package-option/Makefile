@@ -13,7 +13,7 @@ AFTER_PATH=after
 
 proto_after: proto_format
 	protoc \
-	-I=./after \
+	-I=./${AFTER_PATH} \
 	--go_out=:./${AFTER_PATH} \
 	--go_opt=module=github.com/jun06t/grpc-sample/go-package-option/${AFTER_PATH} \
 	./${AFTER_PATH}/team/*.proto \
