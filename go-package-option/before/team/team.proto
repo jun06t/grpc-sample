@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package team;
+
+import "person/person.proto";
+
+message Team {
+  repeated person.Person people = 1;
+}

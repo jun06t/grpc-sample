@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option go_package = "github.com/jun06t/grpc-sample/go-package-option/after/team";
+
+package team;
+
+import "person/person.proto";
+
+message Team {
+  repeated person.Person people = 1;
+}
