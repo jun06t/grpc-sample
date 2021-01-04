@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net"
 
@@ -13,9 +14,12 @@ const (
 	port = ":8080"
 )
 
-type server struct{}
+type server struct {
+	pb.UnimplementedGreeterServer
+}
 
 func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
+	checkBody(in)
 	return &pb.HelloReply{
 		Message: "Hello " + in.Name,
 		Renamed: &pb.Renamed{
@@ -28,6 +32,23 @@ func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloRe
 		},
 	}, nil
 }
+
+func checkBody(in *pb.HelloRequest) {
+	fmt.Println("price:", in.GetPrice())
+}
+
+/*
+func checkBody(in *pb.HelloRequest) {
+	switch in.GetBody().(type) {
+	case *pb.HelloRequest_Code:
+		fmt.Println("code:", in.GetCode())
+	case *pb.HelloRequest_Price:
+		fmt.Println("price:", in.GetPrice())
+	default:
+		fmt.Println("no body")
+	}
+}
+*/
 
 func main() {
 	lis, err := net.Listen("tcp", port)

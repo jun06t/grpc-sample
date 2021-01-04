@@ -23,10 +23,13 @@ func main() {
 
 	req := &pb.HelloRequest{
 		Name: "alice",
+		Body: &pb.HelloRequest_Price{
+			Price: 10000,
+		},
 	}
 	resp, err := c.SayHello(context.Background(), req)
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Println("Reply: ", resp.Message, resp.Nested)
+	log.Println("Reply: ", resp.Message)
 }

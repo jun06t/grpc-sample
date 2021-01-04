@@ -1,5 +1,6 @@
 syntax = "proto3";
 
+option  go_package = "github.com/jun06t/grpc-sample/backward-compatibility/proto;helloworld";
 package helloworld;
 
 service Greeter {
@@ -8,10 +9,13 @@ service Greeter {
 
 message HelloRequest {
   string name = 1;
+
+  string code  = 2;
+  int64  price = 3;
 }
 
 message HelloReply {
-  string  message = 1;
+  string message = 1;
   // Nested nested = 2;
   Renamed renamed = 2;
 }
