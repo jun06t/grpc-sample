@@ -97,14 +97,15 @@ func (c *Client) GetWithMask() error {
 }
 
 func (c *Client) SaveWithMask() error {
-	paths := []string{"id", "email", "address.city"}
+	paths := []string{"id", "email", "address.city", "address.zipcode"}
 	fm := fieldmaskpb.FieldMask{Paths: paths}
 	req := &pb.UpdateRequest{
 		User: &pb.User{
 			Id:    "001",
 			Email: "alice_new@gmail.com",
 			Address: &pb.Address{
-				City: "Ikebukuro",
+				City:    "Ikebukuro",
+				Zipcode: "170-0000",
 			},
 		},
 		FieldMask: &fm,
