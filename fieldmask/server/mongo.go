@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 
+	"github.com/chidiwilliams/flatbson"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -10,7 +11,7 @@ import (
 
 const (
 	dbName  = "field_test"
-	colName = "user"
+	colName = "users"
 )
 
 type mongoClient struct {
@@ -44,8 +45,12 @@ func (m *mongoClient) GetUser(ctx context.Context, id string) (User, error) {
 func (m *mongoClient) UpdateUser(ctx context.Context, u User) error {
 	col := m.cli.Database(dbName).Collection(colName)
 	opt := options.Update().SetUpsert(true)
-	_, err := col.UpdateOne(ctx, bson.M{"_id": u.ID}, bson.M{
-		"$set": &u,
+	doc, err := flatbson.Flatten(u)
+	if err != nil {
+		return err
+	}
+	_, err = col.UpdateOne(ctx, bson.M{"_id": u.ID}, bson.M{
+		"$set": doc,
 	}, opt)
 	if err != nil {
 		return err

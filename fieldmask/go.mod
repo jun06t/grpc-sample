@@ -3,6 +3,7 @@ module github.com/jun06t/grpc-sample/fieldmask
 go 1.18
 
 require (
+	github.com/chidiwilliams/flatbson v0.3.0
 	github.com/golang/protobuf v1.5.2
 	github.com/mennanov/fmutils v0.2.0
 	go.mongodb.org/mongo-driver v1.9.1
