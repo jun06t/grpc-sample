@@ -2,6 +2,8 @@ package main
 
 import (
 	"context"
+	"encoding/json"
+	"fmt"
 	"log"
 
 	pb "github.com/jun06t/grpc-sample/fieldmask/proto/go/user"
@@ -50,7 +52,9 @@ func (c *Client) Get() error {
 	if err != nil {
 		return err
 	}
-	log.Println(resp)
+
+	b, _ := json.Marshal(resp)
+	fmt.Println(string(b))
 	return nil
 }
 
@@ -87,7 +91,8 @@ func (c *Client) GetWithMask() error {
 	if err != nil {
 		return err
 	}
-	log.Println(resp)
+	b, _ := json.Marshal(resp)
+	fmt.Println(string(b))
 	return nil
 }
 
