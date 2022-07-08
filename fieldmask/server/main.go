@@ -31,12 +31,17 @@ func (s *server) Get(ctx context.Context, in *pb.GetRequest) (*pb.GetReply, erro
 	resp := &pb.GetReply{
 		User: s.toUserProto(user),
 	}
-	fmutils.Filter(resp.User, in.FieldMask.GetPaths())
+	if in.FieldMask.IsValid(resp.User) {
+		fmutils.Filter(resp.User, in.FieldMask.GetPaths())
+	}
 	return resp, nil
 }
 
 func (s *server) Update(ctx context.Context, in *pb.UpdateRequest) (*empty.Empty, error) {
-	data := s.toUserEntity(in.User)
+	if in.FieldMask.IsValid(in.User) {
+		fmutils.Filter(in.User, in.FieldMask.GetPaths())
+	}
+	data := s.toUserEntity(in.User, in.FieldMask.GetPaths())
 	err := s.mcli.UpdateUser(ctx, data)
 	if err != nil {
 		return nil, status.Error(codes.Internal, fmt.Sprintf("failed to update user: %s", err))
@@ -62,13 +67,13 @@ func main() {
 	}
 }
 
-func (s *server) toUserEntity(in *pb.User) User {
-	return User{
-		ID:    in.Id,
+func (s *server) toUserProto(in User) *pb.User {
+	return &pb.User{
+		Id:    in.ID,
 		Name:  in.Name,
-		Age:   int(in.Age),
-		Email: in.Email,
-		Address: Address{
+		Age:   int64(in.Age),
+		Email: *in.Email,
+		Address: &pb.Address{
 			Country: in.Address.Country,
 			State:   in.Address.State,
 			City:    in.Address.City,
@@ -77,17 +82,30 @@ func (s *server) toUserEntity(in *pb.User) User {
 	}
 }
 
-func (s *server) toUserProto(in User) *pb.User {
-	return &pb.User{
-		Id:    in.ID,
+func (s *server) toUserEntity(in *pb.User, paths []string) User {
+	u := User{
+		ID:    in.Id,
 		Name:  in.Name,
-		Age:   int64(in.Age),
-		Email: in.Email,
-		Address: &pb.Address{
+		Age:   int(in.Age),
+		Email: &in.Email,
+		Address: Address{
 			Country: in.Address.Country,
 			State:   in.Address.State,
 			City:    in.Address.City,
 			Zipcode: in.Address.Zipcode,
 		},
 	}
+	if len(paths) == 0 {
+		return u
+	}
+
+	// set nil to omit empty
+	u.Email = nil
+
+	for i := range paths {
+		if paths[i] == "email" {
+			u.Email = &in.Email
+		}
+	}
+	return u
 }

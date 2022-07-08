@@ -20,9 +20,13 @@ func main() {
 	}
 
 	c := newClient(conn)
+	defer c.Close()
+
 	c.Save()
 	c.Get()
 	c.GetWithMask()
+	c.SaveWithMask()
+	c.Get()
 }
 
 type Client struct {
@@ -73,7 +77,7 @@ func (c *Client) Save() error {
 }
 
 func (c *Client) GetWithMask() error {
-	paths := []string{"name", "age"}
+	paths := []string{"name", "age", "address.city"}
 	fm := fieldmaskpb.FieldMask{Paths: paths}
 	req := &pb.GetRequest{
 		Id:        "001",
@@ -84,6 +88,31 @@ func (c *Client) GetWithMask() error {
 		return err
 	}
 	log.Println(resp)
+	return nil
+}
+
+func (c *Client) SaveWithMask() error {
+	paths := []string{"id", "name", "email", "address.city", "address.zipcode"}
+	fm := fieldmaskpb.FieldMask{Paths: paths}
+	req := &pb.UpdateRequest{
+		User: &pb.User{
+			Id:    "001",
+			Name:  "bob",
+			Email: "",
+			Age:   25,
+			Address: &pb.Address{
+				Country: "Japan",
+				State:   "Tokyo",
+				City:    "Ikebukuro",
+				Zipcode: "170-0000",
+			},
+		},
+		FieldMask: &fm,
+	}
+	_, err := c.cli.Update(context.Background(), req)
+	if err != nil {
+		return err
+	}
 	return nil
 }
 

@@ -2,15 +2,15 @@ package main
 
 type User struct {
 	ID      string  `bson:"_id"`
-	Name    string  `bson:"name"`
-	Email   string  `bson:"email"`
-	Age     int     `bson:"age"`
-	Address Address `bson:"address"`
+	Name    string  `bson:"name,omitempty"`
+	Email   *string `bson:"email,omitempty"`
+	Age     int     `bson:"age,omitempty"`
+	Address Address `bson:"address,omitempty"`
 }
 
 type Address struct {
-	Country string `bson:"country"`
-	State   string `bson:"state"`
-	City    string `bson:"city"`
-	Zipcode string `bson:"zipcode"`
+	Country string `bson:"country,omitempty"`
+	State   string `bson:"state,omitempty"`
+	City    string `bson:"city,omitempty"`
+	Zipcode string `bson:"zipcode,omitempty"`
 }

@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -47,9 +46,6 @@ func (m *mongoClient) UpdateUser(ctx context.Context, u User) error {
 	opt := options.Update().SetUpsert(true)
 	_, err := col.UpdateOne(ctx, bson.M{"_id": u.ID}, bson.M{
 		"$set": &u,
-		"$setOnInsert": bson.M{
-			"createdAt": time.Now().Unix(),
-		},
 	}, opt)
 	if err != nil {
 		return err
