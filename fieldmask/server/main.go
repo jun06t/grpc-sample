@@ -31,6 +31,7 @@ func (s *server) Get(ctx context.Context, in *pb.GetRequest) (*pb.GetReply, erro
 	resp := &pb.GetReply{
 		User: s.toUserProto(user),
 	}
+	in.FieldMask.Normalize()
 	if in.FieldMask.IsValid(resp.User) {
 		fmutils.Filter(resp.User, in.FieldMask.GetPaths())
 	}
@@ -38,6 +39,7 @@ func (s *server) Get(ctx context.Context, in *pb.GetRequest) (*pb.GetReply, erro
 }
 
 func (s *server) Update(ctx context.Context, in *pb.UpdateRequest) (*empty.Empty, error) {
+	in.FieldMask.Normalize()
 	if in.FieldMask.IsValid(in.User) {
 		fmutils.Filter(in.User, in.FieldMask.GetPaths())
 	}
