@@ -31,16 +31,21 @@ func (s *server) Get(ctx context.Context, in *pb.GetRequest) (*pb.GetReply, erro
 	resp := &pb.GetReply{
 		User: s.toUserProto(user),
 	}
-	//in.FieldMask.Normalize()
-	if in.FieldMask.IsValid(resp.User) {
-		fmutils.Filter(resp.User, in.FieldMask.GetPaths())
+	if in.FieldMask != nil {
+		in.FieldMask.Normalize()
+		if in.FieldMask.IsValid(resp.User) {
+			fmutils.Filter(resp.User, in.FieldMask.GetPaths())
+		}
 	}
 	return resp, nil
 }
 
 func (s *server) Update(ctx context.Context, in *pb.UpdateRequest) (*empty.Empty, error) {
-	if in.FieldMask.IsValid(in.User) {
-		fmutils.Filter(in.User, in.FieldMask.GetPaths())
+	if in.FieldMask != nil {
+		in.FieldMask.Normalize()
+		if in.FieldMask.IsValid(in.User) {
+			fmutils.Filter(in.User, in.FieldMask.GetPaths())
+		}
 	}
 	data := s.toUserEntity(in.User, in.FieldMask.GetPaths())
 	err := s.mcli.UpdateUser(ctx, data)
