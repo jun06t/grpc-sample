@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+option go_package = "github.com/jun06t/grpc-sample/fieldmask/proto/go/user";
+
+package user;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+
+service UserService {
+  rpc Get(GetRequest) returns (GetReply) {}
+  rpc Update(UpdateRequest) returns (google.protobuf.Empty) {}
+}
+
+message User {
+  string  id      = 1;
+  string  name    = 2;
+  string  email   = 3;
+  int64   age     = 4;
+  Address address = 5;
+}
+
+message Address {
+  string country = 1;
+  string state   = 2;
+  string city    = 3;
+  string zipcode = 4;
+}
+
+message GetRequest {
+  string                    id         = 1;
+  google.protobuf.FieldMask field_mask = 2;
+}
+
+message GetReply {
+  User user = 1;
+}
+
+message UpdateRequest {
+  User                      user       = 1;
+  google.protobuf.FieldMask field_mask = 2;
+}
