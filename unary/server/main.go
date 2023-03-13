@@ -16,6 +16,7 @@ const (
 type server struct{}
 
 func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
+	log.Println(in.String())
 	return &pb.HelloReply{Message: "Hello " + in.Name}, nil
 }
 

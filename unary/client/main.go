@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 
 	pb "github.com/jun06t/grpc-sample/unary/proto"
@@ -21,8 +22,11 @@ func main() {
 
 	c := pb.NewGreeterClient(conn)
 
+	fmt.Println("call api")
 	req := &pb.HelloRequest{
 		Name: "alice",
+		Age:  10,
+		Man:  true,
 	}
 	resp, err := c.SayHello(context.Background(), req)
 	if err != nil {
