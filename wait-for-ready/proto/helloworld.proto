@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package helloworld;
+
+option go_package = "github.com/jun06t/grpc-sample/wait-for-ready/proto;helloworld";
+
+service Greeter {
+  rpc SayHello(HelloRequest) returns (HelloReply) {}
+}
+
+message HelloRequest {
+  string name = 1;
+  int32 age = 2;
+  bool man = 3;
+}
+
+message HelloReply { string message = 1; }
