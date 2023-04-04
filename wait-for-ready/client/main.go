@@ -14,7 +14,12 @@ const (
 )
 
 func main() {
-	conn, err := grpc.Dial(address, grpc.WithInsecure())
+	conn, err := grpc.Dial(address,
+		grpc.WithInsecure(),
+		grpc.WithDefaultCallOptions(
+			grpc.WaitForReady(true),
+		),
+	)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -36,7 +41,8 @@ func hello(c pb.GreeterClient) {
 	}
 	ctx, cancel := context.WithTimeout(context.TODO(), 5*time.Second)
 	defer cancel()
-	resp, err := c.SayHello(ctx, req, grpc.WaitForReady(true))
+	//resp, err := c.SayHello(ctx, req, grpc.WaitForReady(true))
+	resp, err := c.SayHello(ctx, req)
 	if err != nil {
 		log.Println(err)
 		return
