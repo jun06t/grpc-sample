@@ -3,8 +3,7 @@ module github.com/jun06t/grpc-sample/metadata/client
 go 1.12
 
 require (
-	github.com/google/uuid v1.1.1 // indirect
-	github.com/jun06t/grpc-sample v0.0.0-20190202065602-04efbcb79edc
+	github.com/jun06t/grpc-sample v0.0.0-20230404043014-02c9ee4cc316
 	github.com/lithammer/shortuuid v3.0.0+incompatible
-	google.golang.org/grpc v1.19.0
+	google.golang.org/grpc v1.53.0
 )
