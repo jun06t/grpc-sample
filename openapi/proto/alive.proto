@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+
+package jun06t.grpc_sample.openapi;
+
+service AliveService {
+  rpc GetStatus(Empty) returns (AliveResponse) {
+    option (google.api.http) = {
+      get: "/alive"
+    };
+  }
+};
+
+message Empty {}
+
+message AliveResponse {
+  bool status = 1;
+}

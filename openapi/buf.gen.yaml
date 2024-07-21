@@ -1,0 +1,12 @@
+version: v1
+plugins:
+  - plugin: buf.build/grpc-ecosystem/openapiv2:v2.15.2
+    out: ../../docs/chat
+    opt:
+      - allow_merge=true
+      - disable_default_errors=true
+      - logtostderr=true
+      - omit_enum_default_value=true
+      - json_names_for_fields=false
+      - visibility_restriction_selectors=HTTP
+      - output_format=yaml
