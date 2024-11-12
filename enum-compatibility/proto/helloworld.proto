@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+option go_package = "github.com/jun06t/grpc-sample/enum-compatibility/proto";
+
 package helloworld;
 
 service Greeter {
@@ -13,13 +15,13 @@ message HelloRequest {
 message HelloReply {
   string message = 1;
   /*
-    enum Role {
-      NONE     = 0;
-      STANDARD = 1;
-      PREMIUM  = 2;
-      ULTIMATE = 3;
-    }
-    Role role = 2;
+  enum Role {
+    NONE     = 0;
+    STANDARD = 1;
+    PREMIUM  = 2;
+    ULTIMATE = 3;
+  }
+  Role role = 2;
   */
   RoleType role = 2;
 }

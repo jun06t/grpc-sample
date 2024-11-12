@@ -3,7 +3,10 @@
 proto: proto_format
 	protoc \
 	-I=./proto \
-	--go_out=plugins=grpc:./proto \
+	--go_out=./proto \
+	--go_opt=module=github.com/jun06t/grpc-sample/enum-compatibility/proto \
+	--go-grpc_out=./proto \
+	--go-grpc_opt=module=github.com/jun06t/grpc-sample/enum-compatibility/proto \
 	./proto/*.proto
 
 proto_format:

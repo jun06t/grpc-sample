@@ -5,7 +5,7 @@ import (
 	"log"
 	"net"
 
-	pb "github.com/jun06t/grpc-sample/enum-compatibility/proto"
+	pb "github.com/jun06t/grpc-sample/enum-compatibility/proto/new"
 	"google.golang.org/grpc"
 )
 
@@ -13,7 +13,9 @@ const (
 	port = ":8080"
 )
 
-type server struct{}
+type server struct {
+	pb.UnimplementedGreeterServer
+}
 
 func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
 	return &pb.HelloReply{

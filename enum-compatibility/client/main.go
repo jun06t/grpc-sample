@@ -4,7 +4,7 @@ import (
 	"context"
 	"log"
 
-	pb "github.com/jun06t/grpc-sample/enum-compatibility/proto"
+	pb "github.com/jun06t/grpc-sample/enum-compatibility/proto/old"
 	"google.golang.org/grpc"
 )
 
