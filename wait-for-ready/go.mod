@@ -7,7 +7,7 @@ require (
 	github.com/jun06t/grpc-sample v0.0.0-20230331211512-c973da41ba20
 	google.golang.org/grpc v1.53.0
 	google.golang.org/grpc/examples v0.0.0-20230331171333-e97991991ce6
-	google.golang.org/protobuf v1.30.0
+	google.golang.org/protobuf v1.33.0
 )
 
 require (
