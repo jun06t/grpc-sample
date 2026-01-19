@@ -8,7 +8,7 @@ require (
 	github.com/mennanov/fmutils v0.2.0
 	go.mongodb.org/mongo-driver v1.9.1
 	google.golang.org/grpc v1.56.3
-	google.golang.org/protobuf v1.30.0
+	google.golang.org/protobuf v1.33.0
 )
 
 require (
