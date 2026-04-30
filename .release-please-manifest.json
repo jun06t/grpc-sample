@@ -21,7 +21,7 @@
   "protoc": "0.0.0",
   "protoeasy": "0.0.0",
   "same-package": "0.0.0",
-  "server-reflection": "0.0.0",
+  "server-reflection": "1.0.0",
   "server-streaming": "0.0.0",
   "unary": "0.0.0",
   "wait-for-ready": "0.0.0"
