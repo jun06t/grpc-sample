@@ -14,7 +14,7 @@
   "graceful": "0.0.0",
   "grpc-gateway": "0.0.0",
   "image-proxy": "0.0.0",
-  "keepalive": "0.0.0",
+  "keepalive": "1.0.0",
   "metadata": "1.0.0",
   "multiple-interceptors": "0.0.0",
   "openapi": "1.0.0",
