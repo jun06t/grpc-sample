@@ -3,7 +3,7 @@
   "bazel": "1.0.0",
   "bidirectional-streaming": "0.0.0",
   "circular-dependency": "0.0.0",
-  "client-side-lb": "0.0.0",
+  "client-side-lb": "1.0.0",
   "client-streaming": "0.0.0",
   "duplicate": "0.0.0",
   "enum-compatibility": "0.0.0",
