@@ -15,7 +15,7 @@
   "grpc-gateway": "0.0.0",
   "image-proxy": "0.0.0",
   "keepalive": "0.0.0",
-  "metadata": "0.0.0",
+  "metadata": "1.0.0",
   "multiple-interceptors": "0.0.0",
   "openapi": "0.0.0",
   "protoc": "0.0.0",
