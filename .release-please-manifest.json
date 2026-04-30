@@ -1,6 +1,6 @@
 {
   "backward-compatibility": "0.0.0",
-  "bazel": "0.0.0",
+  "bazel": "1.0.0",
   "bidirectional-streaming": "0.0.0",
   "circular-dependency": "0.0.0",
   "client-side-lb": "0.0.0",
