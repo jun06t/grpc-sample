@@ -9,7 +9,7 @@
   "enum-compatibility": "0.0.0",
   "envoy-front-proxy": "0.0.0",
   "error-details": "0.0.0",
-  "fieldmask": "0.0.0",
+  "fieldmask": "1.0.0",
   "go-package-option": "0.0.0",
   "graceful": "0.0.0",
   "grpc-gateway": "0.0.0",
