@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/keepalive"
 
 	pb "github.com/jun06t/grpc-sample/keepalive/proto"
@@ -22,8 +23,9 @@ var kacp = keepalive.ClientParameters{
 }
 
 func main() {
-	conn, err := grpc.Dial(
-		address, grpc.WithInsecure(),
+	conn, err := grpc.NewClient(
+		address,
+		grpc.WithTransportCredentials(insecure.NewCredentials()),
 		grpc.WithKeepaliveParams(kacp),
 	)
 	if err != nil {
