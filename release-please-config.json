@@ -3,7 +3,8 @@
   "release-type": "go",
   "include-component-in-tag": true,
   "separate-pull-requests": true,
-  "pull-request-title-pattern": "chore: release${component} ${version}",
+  "component-no-space": true,
+  "pull-request-title-pattern": "chore(${component}): release ${version}",
   "changelog-sections": [
     { "type": "feat", "section": "Features" },
     { "type": "fix", "section": "Bug Fixes" },
