@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.1](https://github.com/jun06t/grpc-sample/compare/unary/v1.0.0...unary/v1.0.1) (2026-04-30)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump google.golang.org/grpc from 1.56.3 to 1.79.3 in /unary ([#90](https://github.com/jun06t/grpc-sample/issues/90)) ([e48422f](https://github.com/jun06t/grpc-sample/commit/e48422ff73be236544eaced8a91dfd5601ce4fbc))
+* update client to resolve deprecated format ([#92](https://github.com/jun06t/grpc-sample/issues/92)) ([ffe8430](https://github.com/jun06t/grpc-sample/commit/ffe84302ca6d687548334aee6712c2888d28b177))
+
 ## 1.0.0 (2026-04-30)
 
 
