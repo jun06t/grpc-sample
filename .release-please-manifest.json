@@ -23,6 +23,6 @@
   "same-package": "0.0.0",
   "server-reflection": "1.0.0",
   "server-streaming": "0.0.0",
-  "unary": "0.0.0",
+  "unary": "1.0.0",
   "wait-for-ready": "1.0.0"
 }
