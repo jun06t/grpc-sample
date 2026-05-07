@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/jun06t/grpc-sample/compare/metadata/v1.0.0...metadata/v1.0.1) (2026-05-07)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump google.golang.org/grpc in /metadata/client ([#93](https://github.com/jun06t/grpc-sample/issues/93)) ([c541825](https://github.com/jun06t/grpc-sample/commit/c5418253bec9a874f9af8fa2fe932f110357847a))
+
 ## 1.0.0 (2026-04-30)
 
 
