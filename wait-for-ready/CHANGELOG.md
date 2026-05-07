@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/jun06t/grpc-sample/compare/wait-for-ready/v1.0.0...wait-for-ready/v1.0.1) (2026-05-07)
+
+
+### Miscellaneous Chores
+
+* **wait-for-ready:** update client to resolve deprecated format ([#96](https://github.com/jun06t/grpc-sample/issues/96)) ([edefc05](https://github.com/jun06t/grpc-sample/commit/edefc05232bbe09b94a987727595a79f49213404))
+
 ## 1.0.0 (2026-04-30)
 
 
