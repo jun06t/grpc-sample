@@ -7,6 +7,7 @@ import (
 
 	pb "github.com/jun06t/grpc-sample/wait-for-ready/proto"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
 const (
@@ -14,8 +15,8 @@ const (
 )
 
 func main() {
-	conn, err := grpc.Dial(address,
-		grpc.WithInsecure(),
+	conn, err := grpc.NewClient(address,
+		grpc.WithTransportCredentials(insecure.NewCredentials()),
 		grpc.WithDefaultCallOptions(
 			grpc.WaitForReady(true),
 		),
