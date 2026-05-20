@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/jun06t/grpc-sample/compare/keepalive/v1.0.0...keepalive/v1.1.0) (2026-05-20)
+
+
+### Features
+
+* scaffold BuildVersion constant for release-please marker test ([#98](https://github.com/jun06t/grpc-sample/issues/98)) ([74149a7](https://github.com/jun06t/grpc-sample/commit/74149a75ae6e10cd510985a371c92f490c1d3490))
+
 ## 1.0.0 (2026-04-30)
 
 
