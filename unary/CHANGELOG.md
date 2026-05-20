@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/jun06t/grpc-sample/compare/unary/v1.1.0...unary/v1.1.1) (2026-05-20)
+
+
+### Miscellaneous Chores
+
+* update go.mod ([#102](https://github.com/jun06t/grpc-sample/issues/102)) ([3f012ae](https://github.com/jun06t/grpc-sample/commit/3f012ae672c04b2b62cc5e86950c0cc34d63674f))
+
 ## [1.1.0](https://github.com/jun06t/grpc-sample/compare/unary/v1.0.1...unary/v1.1.0) (2026-05-20)
 
 
