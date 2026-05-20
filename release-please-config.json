@@ -36,8 +36,14 @@
     "graceful": { "component": "graceful" },
     "grpc-gateway": { "component": "grpc-gateway" },
     "image-proxy": { "component": "image-proxy" },
-    "keepalive": { "component": "keepalive" },
-    "metadata": { "component": "metadata" },
+    "keepalive": {
+      "component": "keepalive",
+      "extra-files": ["server/version.go", "client/version.go"]
+    },
+    "metadata": {
+      "component": "metadata",
+      "extra-files": ["server/version.go", "client/version.go"]
+    },
     "multiple-interceptors": { "component": "multiple-interceptors" },
     "openapi": { "component": "openapi" },
     "protoc": { "component": "protoc" },
@@ -45,7 +51,10 @@
     "same-package": { "component": "same-package" },
     "server-reflection": { "component": "server-reflection" },
     "server-streaming": { "component": "server-streaming" },
-    "unary": { "component": "unary" },
+    "unary": {
+      "component": "unary",
+      "extra-files": ["server/version.go", "client/version.go"]
+    },
     "wait-for-ready": { "component": "wait-for-ready" }
   }
 }
