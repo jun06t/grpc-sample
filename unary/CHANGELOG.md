@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/jun06t/grpc-sample/compare/unary/v1.1.1...unary/v1.1.2) (2026-05-20)
+
+
+### Miscellaneous Chores
+
+* switch version.go to inline x-release-please-version annotation ([#106](https://github.com/jun06t/grpc-sample/issues/106)) ([f0ca86b](https://github.com/jun06t/grpc-sample/commit/f0ca86b8a6e95ff3ba47e172b9d1dc133258a1aa))
+
 ## [1.1.1](https://github.com/jun06t/grpc-sample/compare/unary/v1.1.0...unary/v1.1.1) (2026-05-20)
 
 
