@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/jun06t/grpc-sample/compare/wait-for-ready/v1.0.1...wait-for-ready/v1.0.2) (2026-07-27)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump grpc to 1.82.1 & x/net to 0.55.0 across all modules ([#121](https://github.com/jun06t/grpc-sample/issues/121)) ([b28982b](https://github.com/jun06t/grpc-sample/commit/b28982be8ac94377c53f5cf529ef829fcfdea485))
+
 ## [1.0.1](https://github.com/jun06t/grpc-sample/compare/wait-for-ready/v1.0.0...wait-for-ready/v1.0.1) (2026-05-07)
 
 
