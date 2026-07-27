@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.0.1](https://github.com/jun06t/grpc-sample/compare/fieldmask/v1.0.0...fieldmask/v1.0.1) (2026-07-27)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump go.mongodb.org/mongo-driver in /fieldmask ([#110](https://github.com/jun06t/grpc-sample/issues/110)) ([f309d9c](https://github.com/jun06t/grpc-sample/commit/f309d9cde410fa56320dd19460203518e5b0e132))
+* **deps:** bump golang.org/x/crypto in /fieldmask ([#115](https://github.com/jun06t/grpc-sample/issues/115)) ([1b757e7](https://github.com/jun06t/grpc-sample/commit/1b757e765b46a55c0519deaa9c945948c900d2ca))
+* **deps:** bump grpc to 1.82.1 & x/net to 0.55.0 across all modules ([#121](https://github.com/jun06t/grpc-sample/issues/121)) ([b28982b](https://github.com/jun06t/grpc-sample/commit/b28982be8ac94377c53f5cf529ef829fcfdea485))
+
 ## 1.0.0 (2026-04-30)
 
 
