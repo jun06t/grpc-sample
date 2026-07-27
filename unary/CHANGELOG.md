@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.2](https://github.com/jun06t/grpc-sample/compare/unary/v1.1.1...unary/v1.1.2) (2026-07-27)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump golang.org/x/net from 0.48.0 to 0.55.0 in /unary ([#116](https://github.com/jun06t/grpc-sample/issues/116)) ([4a7aaa4](https://github.com/jun06t/grpc-sample/commit/4a7aaa4d8bb460f139076cbc9fae08643d78ffd0))
+* **deps:** bump grpc to 1.82.1 & x/net to 0.55.0 across all modules ([#121](https://github.com/jun06t/grpc-sample/issues/121)) ([b28982b](https://github.com/jun06t/grpc-sample/commit/b28982be8ac94377c53f5cf529ef829fcfdea485))
+* switch version.go to inline x-release-please-version annotation ([#106](https://github.com/jun06t/grpc-sample/issues/106)) ([f0ca86b](https://github.com/jun06t/grpc-sample/commit/f0ca86b8a6e95ff3ba47e172b9d1dc133258a1aa))
+
 ## [1.1.1](https://github.com/jun06t/grpc-sample/compare/unary/v1.1.0...unary/v1.1.1) (2026-05-20)
 
 
