@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.1](https://github.com/jun06t/grpc-sample/compare/bazel/v1.0.0...bazel/v1.0.1) (2026-07-27)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump golang.org/x/net from 0.48.0 to 0.55.0 in /bazel ([#111](https://github.com/jun06t/grpc-sample/issues/111)) ([fc902c1](https://github.com/jun06t/grpc-sample/commit/fc902c1c0848da66de273dee99180037ade1f357))
+* **deps:** bump grpc to 1.82.1 & x/net to 0.55.0 across all modules ([#121](https://github.com/jun06t/grpc-sample/issues/121)) ([b28982b](https://github.com/jun06t/grpc-sample/commit/b28982be8ac94377c53f5cf529ef829fcfdea485))
+
 ## 1.0.0 (2026-04-30)
 
 
