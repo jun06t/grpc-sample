@@ -8,7 +8,7 @@
   "duplicate": "0.0.0",
   "enum-compatibility": "1.0.0",
   "envoy-front-proxy": "0.0.0",
-  "error-details": "0.0.0",
+  "error-details": "1.0.0",
   "fieldmask": "1.0.0",
   "go-package-option": "0.0.0",
   "graceful": "0.0.0",
