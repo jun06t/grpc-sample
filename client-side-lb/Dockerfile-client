@@ -1,13 +1,15 @@
-FROM golang:1.13-alpine
+FROM golang:1.25-alpine AS build
 
-ARG REPO="github.com/jun06t/grpc-sample/client-side-lb"
+WORKDIR /src
 
-RUN apk add --update --no-cache git
-RUN mkdir -p /go/src/${REPO}
-COPY . /go/src/${REPO}
+COPY go.mod go.sum ./
+RUN go mod download
 
-WORKDIR /go/src/${REPO}
+COPY . .
+RUN CGO_ENABLED=0 go build -o /out/client ./client
 
-RUN cd client && go build && mv client /usr/local/bin
+FROM alpine:3.22
+
+COPY --from=build /out/client /usr/local/bin/client
 
 CMD ["client"]
