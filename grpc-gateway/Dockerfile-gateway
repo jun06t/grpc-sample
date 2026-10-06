@@ -1,14 +1,17 @@
-FROM golang:1.10-alpine
+# Build context must be the repository root because grpc-gateway belongs to the root module.
+FROM golang:1.25-alpine AS build
 
-ARG REPO="github.com/jun06t/grpc-sample/grpc-gateway"
+WORKDIR /src
 
-RUN mkdir -p /go/src/${REPO}
-COPY . /go/src/${REPO}
+COPY go.mod go.sum ./
+RUN go mod download
 
-WORKDIR /go/src/${REPO}
+COPY grpc-gateway ./grpc-gateway
+RUN CGO_ENABLED=0 go build -o /out/grpc-gateway ./grpc-gateway/gateway
 
-RUN go build -o grpc-gateway ./gateway/main.go && \
-  mv grpc-gateway /usr/local/bin/
+FROM alpine:3.22
+
+COPY --from=build /out/grpc-gateway /usr/local/bin/grpc-gateway
 
 EXPOSE 3000
 
