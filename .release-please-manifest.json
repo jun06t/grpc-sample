@@ -5,7 +5,7 @@
   "circular-dependency": "0.0.0",
   "client-side-lb": "1.0.0",
   "client-streaming": "0.0.0",
-  "duplicate": "0.0.0",
+  "duplicate": "1.0.0",
   "enum-compatibility": "1.0.0",
   "envoy-front-proxy": "0.0.0",
   "error-details": "0.0.0",
