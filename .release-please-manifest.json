@@ -12,7 +12,7 @@
   "fieldmask": "1.0.0",
   "go-package-option": "0.0.0",
   "graceful": "0.0.0",
-  "grpc-gateway": "0.0.0",
+  "grpc-gateway": "1.0.0",
   "image-proxy": "0.0.0",
   "keepalive": "1.1.1",
   "metadata": "1.1.1",
