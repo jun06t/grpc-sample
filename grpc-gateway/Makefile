@@ -1,9 +1,6 @@
-.PHONY: prepare build proto
+.PHONY: build proto
 
 REGISTRY_DOMAIN := jun06t
-
-prepare:
-	dep ensure -v
 
 build:
 	docker build -f Dockerfile-gateway -t ${REGISTRY_DOMAIN}/grpc-gateway:latest ..
