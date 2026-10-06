@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.1.2](https://github.com/jun06t/grpc-sample/compare/keepalive/v1.1.1...keepalive/v1.1.2) (2026-10-06)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump google.golang.org/grpc in /keepalive ([#131](https://github.com/jun06t/grpc-sample/issues/131)) ([69a16cc](https://github.com/jun06t/grpc-sample/commit/69a16cc9e727e79b0622492d5f4fc0fe986b121e))
+* **deps:** bump google.golang.org/grpc in /keepalive ([#137](https://github.com/jun06t/grpc-sample/issues/137)) ([31d4fbb](https://github.com/jun06t/grpc-sample/commit/31d4fbbaf8827686fbc1a23f56271be7ce7dbaf6))
+* **deps:** bump grpc to 1.82.1 & x/net to 0.55.0 across all modules ([#121](https://github.com/jun06t/grpc-sample/issues/121)) ([b28982b](https://github.com/jun06t/grpc-sample/commit/b28982be8ac94377c53f5cf529ef829fcfdea485))
+* switch version.go to inline x-release-please-version annotation ([#106](https://github.com/jun06t/grpc-sample/issues/106)) ([f0ca86b](https://github.com/jun06t/grpc-sample/commit/f0ca86b8a6e95ff3ba47e172b9d1dc133258a1aa))
+
 ## [1.1.1](https://github.com/jun06t/grpc-sample/compare/keepalive/v1.1.0...keepalive/v1.1.1) (2026-05-20)
 
 
