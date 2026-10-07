@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.2](https://github.com/jun06t/grpc-sample/compare/metadata/v1.1.1...metadata/v1.1.2) (2026-10-06)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump golang.org/x/net in /metadata/client ([#113](https://github.com/jun06t/grpc-sample/issues/113)) ([454291f](https://github.com/jun06t/grpc-sample/commit/454291f9b71e7766673b958b33560b0070c47c74))
+* **deps:** bump google.golang.org/grpc in /metadata/client ([#132](https://github.com/jun06t/grpc-sample/issues/132)) ([daf3289](https://github.com/jun06t/grpc-sample/commit/daf3289b3deed8f21777e83ae1ece8b9dcf8c0f3))
+* **deps:** bump google.golang.org/grpc in /metadata/server ([#126](https://github.com/jun06t/grpc-sample/issues/126)) ([650611f](https://github.com/jun06t/grpc-sample/commit/650611f7e76c57567e6741739976d49083d18fc2))
+* **deps:** bump google.golang.org/grpc in /metadata/server ([#135](https://github.com/jun06t/grpc-sample/issues/135)) ([40b93d8](https://github.com/jun06t/grpc-sample/commit/40b93d81e54d3d7adce13bcf4f1ddb6d4814a49a))
+* **deps:** bump grpc to 1.82.1 & x/net to 0.55.0 across all modules ([#121](https://github.com/jun06t/grpc-sample/issues/121)) ([b28982b](https://github.com/jun06t/grpc-sample/commit/b28982be8ac94377c53f5cf529ef829fcfdea485))
+* switch version.go to inline x-release-please-version annotation ([#106](https://github.com/jun06t/grpc-sample/issues/106)) ([f0ca86b](https://github.com/jun06t/grpc-sample/commit/f0ca86b8a6e95ff3ba47e172b9d1dc133258a1aa))
+
 ## [1.1.1](https://github.com/jun06t/grpc-sample/compare/metadata/v1.1.0...metadata/v1.1.1) (2026-05-20)
 
 
