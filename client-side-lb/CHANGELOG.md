@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.0.1](https://github.com/jun06t/grpc-sample/compare/client-side-lb/v1.0.0...client-side-lb/v1.0.1) (2026-10-06)
+
+
+### Bug Fixes
+
+* **client-side-lb:** migrate client to grpc.NewClient and dns resolver ([#139](https://github.com/jun06t/grpc-sample/issues/139)) ([d72c953](https://github.com/jun06t/grpc-sample/commit/d72c953f3b1f3c748c56ddc9940e59140cf55039))
+* **deps:** bump google.golang.org/grpc to v1.83.2 ([#138](https://github.com/jun06t/grpc-sample/issues/138)) ([78c92f8](https://github.com/jun06t/grpc-sample/commit/78c92f8be2ece982bfbccde9b4ad42df2a4e35da))
+
+
+### Miscellaneous Chores
+
+* **deps:** bump grpc to 1.82.1 & x/net to 0.55.0 across all modules ([#121](https://github.com/jun06t/grpc-sample/issues/121)) ([b28982b](https://github.com/jun06t/grpc-sample/commit/b28982be8ac94377c53f5cf529ef829fcfdea485))
+
 ## 1.0.0 (2026-04-30)
 
 
