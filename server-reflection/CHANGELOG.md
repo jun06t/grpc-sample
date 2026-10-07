@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.0.1](https://github.com/jun06t/grpc-sample/compare/server-reflection/v1.0.0...server-reflection/v1.0.1) (2026-10-06)
+
+
+### Bug Fixes
+
+* **deps:** bump google.golang.org/grpc to v1.83.2 ([#138](https://github.com/jun06t/grpc-sample/issues/138)) ([78c92f8](https://github.com/jun06t/grpc-sample/commit/78c92f8be2ece982bfbccde9b4ad42df2a4e35da))
+
+
+### Miscellaneous Chores
+
+* **deps:** bump google.golang.org/grpc in /server-reflection ([#127](https://github.com/jun06t/grpc-sample/issues/127)) ([26156c9](https://github.com/jun06t/grpc-sample/commit/26156c9b10637c313c9a3eea6400c72f6cf5b725))
+* **deps:** bump grpc to 1.82.1 & x/net to 0.55.0 across all modules ([#121](https://github.com/jun06t/grpc-sample/issues/121)) ([b28982b](https://github.com/jun06t/grpc-sample/commit/b28982be8ac94377c53f5cf529ef829fcfdea485))
+
 ## 1.0.0 (2026-04-30)
 
 
